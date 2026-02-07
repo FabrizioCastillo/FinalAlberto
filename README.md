@@ -84,35 +84,7 @@ Esto iniciará:
 
 ---
 
-## 🔧 Desarrollo Local (Sin Docker)
 
-### Backend
-
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # o venv\\Scripts\\activate en Windows
-pip install -r requirements.txt
-
-# Ejecutar migraciones
-alembic upgrade head
-
-# Iniciar servidor
-uvicorn main:app --reload
-```
-
-La documentación de la API (Swagger) estará disponible en:
-**[http://localhost:8000/docs](http://localhost:8000/docs)**
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
 
 ## 📂 Estructura del Proyecto
 
