@@ -1,86 +1,168 @@
-# TechStore - Proyecto Final de Python
+# 🚴‍♂️ Velorace - E-commerce de Ciclismo
 
-Bienvenidx al proyecto **TechStore**, donde decidimos reinventar el comercio electrónico porque, claramente, el mundo necesitaba otra tienda online. Este proyecto es el resultado de noches interminables, discusiones acaloradas y la pérdida de nuestra fe en la humanidad (y en los deadlines).
+Velorace es una plataforma de comercio electrónico completa, moderna y de alto rendimiento diseñada para la venta de bicicletas y accesorios. El proyecto implementa una arquitectura separada (Frontend y Backend) contenerizada, con un fuerte enfoque en la **escalabilidad**, el **rendimiento** y la **experiencia de usuario**.
 
-## Características
+---
 
-- **Catálogo de productos**: Para que puedas mirar cosas que no vas a comprar porque, seamos realistas, ¿quién tiene plata?
-- **Carrito de compras**: Agregá productos, mirá el total y después cerrá la pestaña. Es como terapia, pero gratis.
-- **Autenticación**: Registrate e iniciá sesión, porque queremos saber quién sos antes de ignorar tus problemas.
-- **Panel de administración**: Un lugar donde los admins pueden jugar a ser dioses... hasta que algo se rompe.
-- **Sistema de órdenes**: Hacé pedidos y sentite como si estuvieras en el súper, pero sin la satisfacción de llevarte algo a casa.
-- **Integración con PostgreSQL y Redis**: Porque usar SQLite sería como usar cinta adhesiva para arreglar un barco que se hunde.
+## 🚀 Tecnologías Principales
 
-## Requisitos
+### Backend (API REST)
 
-- **Backend**:
-  - Python 3.10 o superior (porque las versiones viejas son como el VHS: nostálgicas, pero inútiles).
-  - PostgreSQL 15 (porque necesitamos una base de datos más robusta que tu autoestima).
-  - Redis (porque guardar cosas en memoria es para amateurs).
-- **Frontend**:
-  - Node.js 20 o superior (porque las versiones viejas son para quienes disfrutan sufrir).
-  - NPM o Yarn (elegí el que menos te haga llorar).
+* **Framework:** FastAPI (Python) – API rápida y asíncrona.
+* **Base de Datos:** PostgreSQL (SQLAlchemy ORM).
+* **Migraciones:** Alembic.
+* **Caché y Rendimiento:** Redis.
+* **Validación de Datos:** Pydantic.
+* **Seguridad:** Rate Limiting (middleware propio) y autenticación JWT.
+* **Testing:** Pytest.
 
-## Configuración
+### Frontend (SPA)
 
-### Backend
+* **Framework:** React (Vite).
+* **Estilos:** Tailwind CSS.
+* **Gestión de Estado:** Zustand (stores para Auth y Carrito).
+* **Gráficos:** Recharts (monitoreo de latencia en admin).
+* **Testing:** Jest + React Testing Library.
 
-1. Andá al directorio del backend:
-   ```bash
-   cd backend
-   ```
-2. Creá un entorno virtual e instalá las dependencias:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-3. Configurá las variables de entorno en `.env` (basado en `.env.example`).
-4. Ejecutá las migraciones:
-   ```bash
-   alembic upgrade head
-   ```
-5. Levantá el servidor:
-   ```bash
-   uvicorn main:app --reload
-   ```
+### Infraestructura y DevOps
 
-### Frontend
+* **Contenedores:** Docker y Docker Compose.
+* **Servidor Web:** Nginx (Reverse Proxy).
 
-1. Andá al directorio del frontend:
-   ```bash
-   cd frontend
-   ```
-2. Instalá las dependencias:
-   ```bash
-   npm install
-   ```
-3. Creá un archivo `.env` en el directorio frontend con:
-   ```bash
-   VITE_API_URL=http://localhost:8000
-   ```
-4. Levantá el servidor de desarrollo:
-   ```bash
-   npm run dev
-   ```
+---
 
-### Docker (opcional)
+## ✨ Características del Sistema
 
-¿Querés complicarte la vida con contenedores? Perfecto:
+### Para el Cliente
+
+* **Catálogo de Productos:** Exploración de bicicletas y accesorios con filtrado por categorías.
+* **Carrito de Compras:** Estado global persistente del carrito.
+* **Sistema de Pedidos:** Checkout, generación de órdenes y facturación (Bills).
+* **Perfil de Usuario:** Historial de pedidos y gestión de direcciones.
+* **Reseñas:** Comentarios y valoraciones de productos.
+
+### Para el Administrador
+
+* **Dashboard Administrativo:** Panel de control protegido.
+* **Gestión de Inventario:** CRUD completo de productos y categorías.
+* **Monitoreo de Rendimiento:** Gráficos en tiempo real de latencia del sistema (LatencyChart).
+* **Gestión de Clientes:** Visualización de usuarios registrados.
+
+---
+
+## 🛠️ Instalación y Despliegue (Docker)
+
+La forma más sencilla de levantar el proyecto es utilizando **Docker Compose**, que orquesta el Backend, Frontend, la Base de Datos y Redis.
+
+### 1️⃣ Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/velorace.git
+cd velorace
+```
+
+### 2️⃣ Configurar variables de entorno
+
+```bash
+cd backend
+cp .env.example .env
+# Edita el archivo .env con tus credenciales si es necesario
+```
+
+### 3️⃣ Levantar los servicios
+
 ```bash
 docker-compose up --build
 ```
 
-## Estructura del Proyecto
+Esto iniciará:
 
-- **backend/**: Donde FastAPI hace su magia... o al menos lo intenta.
-- **frontend/**: Donde React y TailwindCSS se pelean constantemente.
-- **docker-compose.yml**: Porque todo proyecto necesita un archivo que nadie entiende, pero todos fingen que sí.
-
-## Contribuciones
-
-¿Tenés una idea brillante? Abrí un **issue** o mandá un **pull request**. Si no es brillante, igual lo aceptamos porque, bueno, ya estamos acostumbrados a las decepciones.
+* **Backend:** [http://localhost:8000](http://localhost:8000)
+* **Frontend:** [http://localhost:5173](http://localhost:5173) (o el puerto configurado en Nginx/Docker)
+* **PostgreSQL**
+* **Redis**
 
 ---
 
-Desarrollado por Salita Verde SA, porque "TechStore Inc." ya estaba registrado y, sinceramente, no teníamos ganas de pensar otro nombre.
+## 🔧 Desarrollo Local (Sin Docker)
+
+### Backend
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # o venv\\Scripts\\activate en Windows
+pip install -r requirements.txt
+
+# Ejecutar migraciones
+alembic upgrade head
+
+# Iniciar servidor
+uvicorn main:app --reload
+```
+
+La documentación de la API (Swagger) estará disponible en:
+**[http://localhost:8000/docs](http://localhost:8000/docs)**
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 📂 Estructura del Proyecto
+
+El proyecto sigue una arquitectura limpia y modular:
+
+```plaintext
+velorace/
+├── backend/
+│   ├── app/                # Lógica principal
+│   ├── config/             # Configuraciones (DB, Redis, Logs)
+│   ├── controllers/        # Endpoints de la API
+│   ├── middleware/         # Rate limiter, Request ID
+│   ├── migrations/         # Versiones de Alembic
+│   ├── models/             # Modelos SQLAlchemy
+│   ├── repositories/       # Acceso a datos (DAO)
+│   ├── schemas/            # Esquemas Pydantic (DTOs)
+│   ├── services/           # Lógica de negocio
+│   └── tests/              # Tests unitarios e integración
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # Componentes UI
+│   │   ├── hooks/          # Custom hooks
+│   │   ├── pages/          # Vistas principales
+│   │   ├── services/       # Llamadas a la API
+│   │   └── store/          # Estado global (Auth, Cart)
+│   └── public/             # Assets estáticos
+│
+└── docker-compose.yml      # Orquestación de contenedores
+```
+
+---
+
+## 🧪 Testing
+
+### Backend
+
+```bash
+cd backend
+pytest
+```
+
+Incluye pruebas de controladores, servicios, repositorios y concurrencia.
+
+---
+
+## 🛡️ Seguridad y Rendimiento
+
+Este proyecto no es solo una tienda básica, incluye características avanzadas para entornos de producción:
+
+* **Rate Limiting:** Protección contra abuso de API y ataques DDoS.
+* **Caching con Redis:** Optimización de endpoints de lectura frecuente (ej. catálogo).
+* **Logging Estructurado:** Logs configurados para trazabilidad y monitoreo.
